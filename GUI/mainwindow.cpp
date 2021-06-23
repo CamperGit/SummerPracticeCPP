@@ -9,6 +9,7 @@
 #include <message.h>
 #include <QtGui>
 #include <QErrorMessage>
+#include <QMessageBox>
 
 MainWindow::MainWindow(User& currentUser,QVector<User>& users,QWidget *parent)
     : QMainWindow(parent)
@@ -37,15 +38,21 @@ void MainWindow::on_registrationButton_clicked()
     if (ok) {
         QString username = list[0];
         QString password = list[1];
-        User newUser(username,password);
-        users.push_back(newUser);
-        currentUser = newUser;
-        ui->comboBox->addItem(username);
+        if (password.isEmpty() || username.isEmpty())
+        {
+            QMessageBox::warning(this,"Ошибка регистрации","Пароль и логин не могут быть пустыми!",0,1);
+            return;
+        } else {
+            User newUser(username,password);
+            users.push_back(newUser);
+            currentUser = newUser;
+            ui->comboBox->addItem(username);
 
-        ui->comboBox->setEnabled(true);
-        ui->subjectLineEdit->setEnabled(true);
-        ui->messageTextArea->setEnabled(true);
-        ui->sendButton->setEnabled(true);
+            ui->comboBox->setEnabled(true);
+            ui->subjectLineEdit->setEnabled(true);
+            ui->messageTextArea->setEnabled(true);
+            ui->sendButton->setEnabled(true);
+        }
     }
 }
 
@@ -55,9 +62,7 @@ void MainWindow::on_sendButton_clicked()
     QString messageText = ui->messageTextArea->toPlainText();
     if (messageText.isEmpty())
     {
-        QErrorMessage errorMessage;
-        errorMessage.showMessage("Текст сообщения не может быть пустым!");
-        errorMessage.exec();
+        QMessageBox::warning(this,"Ошибка отправки сообщения","Текст сообщения не может быть пустым!",0,1);
         return;
     } else {
         messageText.replace("\n"," ");
@@ -70,9 +75,7 @@ void MainWindow::on_sendButton_clicked()
     QString subjectText = ui->subjectLineEdit->text();
     if (subjectText.isEmpty())
     {
-        QErrorMessage errorMessage;
-        errorMessage.showMessage("Тема сообщения не может быть пустой!");
-        errorMessage.exec();
+        QMessageBox::warning(this,"Ошибка отправки сообщения","Тема сообщения не может быть пустой!",0,1);
         return;
     }
 
@@ -80,9 +83,7 @@ void MainWindow::on_sendButton_clicked()
     QString toLoginText = ui->comboBox->currentText();
     if (toLoginText == currentUser.getLogin())
     {
-        QErrorMessage errorMessage;
-        errorMessage.showMessage("Нельзя отправить сообщение самому себе!");
-        errorMessage.exec();
+        QMessageBox::warning(this,"Ошибка отправки сообщения","Нельзя отправить сообщение самому себе!",0,1);
         return;
     }
 
@@ -90,9 +91,7 @@ void MainWindow::on_sendButton_clicked()
     QString fromLoginText = currentUser.getLogin();
     if (fromLoginText.isEmpty())
     {
-        QErrorMessage errorMessage;
-        errorMessage.showMessage("Войдите или зарегестрируйтесь, чтобы отправлять сообщения!");
-        errorMessage.exec();
+        QMessageBox::warning(this,"Ошибка отправки сообщения","Войдите или зарегестрируйтесь, чтобы отправлять сообщения!",0,1);
         return;
     }
 
@@ -105,12 +104,12 @@ void MainWindow::on_sendButton_clicked()
         }
     }
 
-    /*ui->messageTextArea->append("\n\n");
+    ui->messageTextArea->append("\n\n");
     ui->messageTextArea->append(messageText);
     ui->messageTextArea->append(currentTime.toString("yyyy-MM-dd  HH:mm:ss"));
     ui->messageTextArea->append(subjectText);
     ui->messageTextArea->append(fromLoginText);
-    ui->messageTextArea->append(toLoginText);*/
+    ui->messageTextArea->append(toLoginText);
 
 }
 
