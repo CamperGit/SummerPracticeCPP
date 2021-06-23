@@ -8,23 +8,23 @@
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
-    QDate date(2021,6,23);
-    QTime time(13,16);
-    QDate date1(2021,7,23);
-    QTime time1(13,16);
-    QDateTime sendDateTime(date,time);
+    QDate date1(2021,6,23);
+    QTime time1(23,16);
+    QDate date2(2021,6,23);
+    QTime time2(13,16);
     QDateTime sendDateTime1(date1,time1);
-    Message mes1("text",sendDateTime,"subject","sender","receiver");
-    Message mes2("text2",sendDateTime1,"subject2","sender2","receiver2");
+    QDateTime sendDateTime2(date2,time2);
+    Message mes1("text",sendDateTime1,"subject","sender","receiver");
+    Message mes2("text2",sendDateTime2,"subject2","sender2","receiver2");
     QVector<Message> messages;
-    messages.push_back(mes1);
     messages.push_back(mes2);
-    for(int i = 0; i < messages.size()-1; i++)
+    messages.push_back(mes1);
+    for(int i = 0; i < messages.size(); i++)
     {
         qDebug() << messages[i].getText();
     }
     MessageFilter::filterByTime(messages);
-    for(int i = 0; i < messages.size()-1; i++)
+    for(int i = 0; i < messages.size(); i++)
     {
         qDebug() << messages[i].getText();
     }

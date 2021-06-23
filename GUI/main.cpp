@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
     return a.exec();
 }
 
-void loadUsers(QString saveDir)
+void loadUsers(QVector<User> usersList,QString saveDir)
 {
 
 }
