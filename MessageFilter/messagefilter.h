@@ -10,6 +10,7 @@ class MESSAGEFILTER_EXPORT MessageFilter
 {
 public:
     static QVector<Message> getMessagesSentBeforeSelectedTime(QVector<Message> messages, QDateTime timeBefore);
+    static QVector<Message> filterByTime(QVector<Message> messages, QDateTime date);
 };
 
 #endif // MESSAGEFILTER_H

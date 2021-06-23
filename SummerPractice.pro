@@ -4,5 +4,5 @@ SUBDIRS += \
     GUI \
     Message \
     MessageFilter \
-    User
-
+    User \
+    tests
