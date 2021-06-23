@@ -25,6 +25,12 @@ QString User::getLogin()
     return login;
 }
 
+QString User::getPassword()
+{
+    //Тут магическая шифрация пароля kekw8
+    return password;
+}
+
 QVector<Message> User::getMessages()
 {
     return messages;

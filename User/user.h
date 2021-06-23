@@ -17,6 +17,7 @@ public:
     User(const QString login, const QString password, const QVector<Message> messages);
 
     QString getLogin();
+    QString getPassword();
     QVector<Message> getMessages();
     void addMessage(const Message &message);
     static bool verification(const QVector<User> &users, const QString login, const QString password);

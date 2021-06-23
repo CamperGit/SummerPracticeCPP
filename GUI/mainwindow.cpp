@@ -110,12 +110,12 @@ void MainWindow::on_sendButton_clicked()
     }
 
 
-    ui->messageTextArea->append("\n\n");
+    /*ui->messageTextArea->append("\n\n");
     ui->messageTextArea->append(messageText);
     ui->messageTextArea->append(currentTime.toString("yyyy-MM-dd  HH:mm:ss"));
     ui->messageTextArea->append(subjectText);
     ui->messageTextArea->append(fromLoginText);
-    ui->messageTextArea->append(toLoginText);
+    ui->messageTextArea->append(toLoginText);*/
 
 }
 
