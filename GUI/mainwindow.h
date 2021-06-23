@@ -14,6 +14,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
+    QVector<User> getUsers();
     MainWindow(User& currentUser,QVector<User>& users,QWidget *parent = nullptr);
     ~MainWindow();
 
