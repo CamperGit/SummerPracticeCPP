@@ -30,4 +30,6 @@ public:
     void setReceiverLogin(const QString receiverLogin);
 };
 
+Q_DECLARE_METATYPE( Message )
+
 #endif // MESSAGE_H

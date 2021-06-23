@@ -117,7 +117,6 @@ void MainWindow::on_sendButton_clicked()
         }
     }
 
-
     /*ui->messageTextArea->append("\n\n");
     ui->messageTextArea->append(messageText);
     ui->messageTextArea->append(currentTime.toString("yyyy-MM-dd  HH:mm:ss"));
@@ -149,6 +148,17 @@ void MainWindow::on_loginButton_clicked()
                     ui->subjectLineEdit->setEnabled(true);
                     ui->messageTextArea->setEnabled(true);
                     ui->sendButton->setEnabled(true);
+
+                    QVector<Message> messages = currentUser.getMessages();
+                    for(int j = 0; j < messages.size();j++)
+                    {
+                        QListWidgetItem *itm = new QListWidgetItem;
+                        QVariant line  = QVariant::fromValue(messages[j]);
+                        itm->setData(1,line);
+                        //ui->messageList->addItem(itm);
+                        //ui->messageList->addItem()
+                        //ui->messageList->addItem(messages[i].getSubject());
+                    }
                     return;
                 }
             }
