@@ -22,6 +22,8 @@ private slots:
 
     void on_registrationButton_clicked();
 
+    void on_sendButton_clicked();
+
 private:
     User currentUser;
     QVector<User> users;
