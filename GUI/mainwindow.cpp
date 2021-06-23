@@ -104,6 +104,9 @@ void MainWindow::on_sendButton_clicked()
         }
     }
 
+    QLabel* pLabel = new QLabel;
+    pLabel->setStyleSheet("QLabel { background-color : black; color : white; }");
+
     ui->messageTextArea->append("\n\n");
     ui->messageTextArea->append(messageText);
     ui->messageTextArea->append(currentTime.toString("yyyy-MM-dd  HH:mm:ss"));
