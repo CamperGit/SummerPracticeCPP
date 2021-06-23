@@ -22,7 +22,7 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
     <item row="4" column="3" colspan="2">
-     <widget class="QTextEdit" name="textEdit"/>
+     <widget class="QTextEdit" name="messageTextArea"/>
     </item>
     <item row="0" column="0" rowspan="6">
      <layout class="QVBoxLayout" name="verticalLayout"/>
@@ -37,14 +37,14 @@
     <item row="0" column="4">
      <layout class="QGridLayout" name="gridLayout_7">
       <item row="0" column="1">
-       <widget class="QPushButton" name="pushButton_2">
+       <widget class="QPushButton" name="loginButton">
         <property name="text">
          <string>Войти</string>
         </property>
        </widget>
       </item>
       <item row="0" column="2">
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="registrationButton">
         <property name="text">
          <string>Регистрация</string>
         </property>
@@ -73,35 +73,35 @@
      </layout>
     </item>
     <item row="5" column="3" colspan="2">
-     <widget class="QPushButton" name="pushButton_3">
+     <widget class="QPushButton" name="sendButton">
       <property name="text">
        <string>Отправить</string>
       </property>
      </widget>
     </item>
     <item row="1" column="1">
-     <widget class="QPushButton" name="pushButton_4">
+     <widget class="QPushButton" name="timeDownUpSortButton">
       <property name="text">
        <string>Сорт. время 1-9</string>
       </property>
      </widget>
     </item>
     <item row="1" column="2">
-     <widget class="QPushButton" name="pushButton_5">
+     <widget class="QPushButton" name="alphabetDownUpSortButton">
       <property name="text">
        <string>Сорт. А-Я</string>
       </property>
      </widget>
     </item>
     <item row="2" column="1">
-     <widget class="QPushButton" name="pushButton_6">
+     <widget class="QPushButton" name="timeUpDownSortButton">
       <property name="text">
        <string>Сорт. время 9-1</string>
       </property>
      </widget>
     </item>
     <item row="2" column="2">
-     <widget class="QPushButton" name="pushButton_7">
+     <widget class="QPushButton" name="alphabetUpDownSortButton">
       <property name="text">
        <string>Сорт. Я-А</string>
       </property>
@@ -115,7 +115,7 @@
      </widget>
     </item>
     <item row="2" column="4">
-     <widget class="QLineEdit" name="lineEdit"/>
+     <widget class="QLineEdit" name="subjectLineEdit"/>
     </item>
     <item row="2" column="3">
      <widget class="QLabel" name="label">
@@ -135,7 +135,7 @@
      <x>0</x>
      <y>0</y>
      <width>1090</width>
-     <height>25</height>
+     <height>20</height>
     </rect>
    </property>
   </widget>

@@ -8,11 +8,6 @@
 #include <user.h>
 //#include <main.cpp>
 
-QVector<User> MainWindow::getUsers()
-{
-    return users;
-}
-
 MainWindow::MainWindow(User& currentUser,QVector<User>& users,QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -27,8 +22,13 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::on_comboBox_activated(const QString &arg1)
+{
 
-void MainWindow::on_pushButton_clicked()
+}
+
+
+void MainWindow::on_registrationButton_clicked()
 {
     bool ok;
     QStringList list = InputDialog::getStrings(this, &ok);
@@ -40,10 +40,5 @@ void MainWindow::on_pushButton_clicked()
         currentUser = newUser;
         ui->comboBox->addItem(username);
     }
-}
-
-void MainWindow::on_comboBox_activated(const QString &arg1)
-{
-
 }
 
