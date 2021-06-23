@@ -41,6 +41,11 @@ void MainWindow::on_registrationButton_clicked()
         users.push_back(newUser);
         currentUser = newUser;
         ui->comboBox->addItem(username);
+
+        ui->comboBox->setEnabled(true);
+        ui->subjectLineEdit->setEnabled(true);
+        ui->messageTextArea->setEnabled(true);
+        ui->sendButton->setEnabled(true);
     }
 }
 
@@ -100,12 +105,12 @@ void MainWindow::on_sendButton_clicked()
         }
     }
 
-    ui->messageTextArea->append("\n\n");
+    /*ui->messageTextArea->append("\n\n");
     ui->messageTextArea->append(messageText);
     ui->messageTextArea->append(currentTime.toString("yyyy-MM-dd  HH:mm:ss"));
     ui->messageTextArea->append(subjectText);
     ui->messageTextArea->append(fromLoginText);
-    ui->messageTextArea->append(toLoginText);
+    ui->messageTextArea->append(toLoginText);*/
 
 }
 

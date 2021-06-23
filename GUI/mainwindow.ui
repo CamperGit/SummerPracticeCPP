@@ -22,7 +22,11 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
     <item row="4" column="3" colspan="2">
-     <widget class="QTextEdit" name="messageTextArea"/>
+     <widget class="QTextEdit" name="messageTextArea">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+     </widget>
     </item>
     <item row="0" column="0" rowspan="6">
      <layout class="QVBoxLayout" name="verticalLayout"/>
@@ -68,12 +72,19 @@
     <item row="1" column="4">
      <layout class="QGridLayout" name="gridLayout_6">
       <item row="0" column="0">
-       <widget class="QComboBox" name="comboBox"/>
+       <widget class="QComboBox" name="comboBox">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>
     <item row="5" column="3" colspan="2">
      <widget class="QPushButton" name="sendButton">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="text">
        <string>Отправить</string>
       </property>
@@ -115,7 +126,11 @@
      </widget>
     </item>
     <item row="2" column="4">
-     <widget class="QLineEdit" name="subjectLineEdit"/>
+     <widget class="QLineEdit" name="subjectLineEdit">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+     </widget>
     </item>
     <item row="2" column="3">
      <widget class="QLabel" name="label">
@@ -125,7 +140,11 @@
      </widget>
     </item>
     <item row="4" column="1" rowspan="2" colspan="2">
-     <widget class="QListView" name="listView"/>
+     <widget class="QListView" name="listView">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
