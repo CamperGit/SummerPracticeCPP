@@ -11,7 +11,7 @@
 #include <QFile>
 
 void saveUsers(QVector<User> usersList);
-void loadUsers(QVector<User> usersList);
+void loadUsers(QVector<User> &usersList);
 
 int main(int argc, char *argv[])
 {
@@ -79,9 +79,48 @@ void saveUsers(QVector<User> usersList)
           stream << jsonString;
                 file.close();
 }
-void loadUsers(QVector<User> usersList)
+void loadUsers(QVector<User> &usersList)
 {
-    //if(!QFile(mtl_file).exists()))
+    if(QFile("save.json").exists())
+    {
+        QString val;
+        QFile file;
+        file.setFileName("save.json");
+        file.open(QIODevice::ReadOnly | QIODevice::Text);
+        val = file.readAll();
+        file.close();
+
+        QJsonDocument doc = QJsonDocument::fromJson(val.toUtf8());
+        QJsonObject json = doc.object();
+
+        QJsonArray usersArray = json["users"].toArray();
+        for(int i = 0; i < usersArray.size();i++)
+        {
+            QJsonObject userJsonObject = usersArray[i].toObject();
+
+            QString login = userJsonObject["login"].toString();
+            QString password = userJsonObject["password"].toString();
+
+            QVector<Message> messages;
+            QJsonArray messagesArray = userJsonObject["messages"].toArray();
+            for(int j = 0;j < messagesArray.size();j++)
+            {
+                QJsonObject messageJsonObject = messagesArray[j].toObject();
+
+                QString text = messageJsonObject["text"].toString();
+                QDateTime time = QDateTime::fromString(messageJsonObject["time"].toString(),"yyyy-MM-dd  HH:mm:ss");
+                QString subject = messageJsonObject["subject"].toString();
+                QString senderLogin = messageJsonObject["senderLogin"].toString();
+                QString receiverLogin = messageJsonObject["receiverLogin"].toString();
+
+                Message loadedMessage(text,time,subject,senderLogin,receiverLogin);
+                messages.push_back(loadedMessage);
+            }
+
+            User loadedUser(login,password,messages);
+            usersList.push_back(loadedUser);
+        }
+    }
 }
 
 
