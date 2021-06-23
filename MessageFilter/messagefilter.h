@@ -9,8 +9,10 @@
 class MESSAGEFILTER_EXPORT MessageFilter
 {
 public:
-    static void filterByTime(QVector<Message>& messages);
-    static void filterByAlphabet(QVector<Message>& messages);
+    static void filterByTimeSmallToBig(QVector<Message>& messages);
+    static void filterByAlphabetSmallToBig(QVector<Message>& messages);
+    static void filterByTimeBigToSmall(QVector<Message>& messages);
+    static void filterByAlphabetBigToSmall(QVector<Message>& messages);
 };
 
 #endif // MESSAGEFILTER_H

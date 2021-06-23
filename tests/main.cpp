@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
         qDebug() << messages[i].getSubject();
     }
     qDebug() << "\n\n";
-    MessageFilter::filterByAlphabet(messages);
+    MessageFilter::filterByAlphabetBigToSmall(messages);
     for(int i = 0; i < messages.size(); i++)
     {
         qDebug() << messages[i].getSubject();
