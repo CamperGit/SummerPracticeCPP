@@ -30,6 +30,11 @@ void User::addMessage(const Message &message)
     this->messages.push_back(message);
 }
 
+/*
+* @param QVector<Message> messages - messages to filter
+* @param QDateTime timeBefore - time for filter
+* @return - filtered message list
+*/
 bool User::verification(const QVector<User> &users, const QString login, const QString password)
 {
     for (int i = 0; i < users.size(); i++)

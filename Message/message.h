@@ -23,14 +23,11 @@ public:
     QString getSenderLogin();
     QString getReceiverLogin();
 
-    void get_aboba();
-
     void setText(const QString text);
     void setSendTime(const QDateTime time);
     void setSubject(const QString subject);
     void setSenderLogin(const QString senderLogin);
     void setReceiverLogin(const QString receiverLogin);
-    void setMessageTime();
 };
 
 #endif // MESSAGE_H

@@ -1,7 +1,8 @@
 #include "messagefilter.h"
 
-QVector<Message> MessageFilter::filterByDateAndTime(QVector<Message> messages)
+QVector<Message> MessageFilter::filterByTime(QVector<Message> messages, QDateTime date)
 {
+
     QVector<Message> filteredMessages;
     for (int i = 0 ; i < messages.size();i++)
     {
@@ -11,4 +12,5 @@ QVector<Message> MessageFilter::filterByDateAndTime(QVector<Message> messages)
         }
     }
     return filteredMessages;
+
 }
