@@ -1,16 +1,19 @@
 #include "messagefilter.h"
 
-QVector<Message> MessageFilter::filterByTime(QVector<Message> messages, QDateTime date)
+void MessageFilter::filterByTime(QVector<Message>& messages)
 {
-
-    QVector<Message> filteredMessages;
     for (int i = 0 ; i < messages.size();i++)
     {
-        if (messages[i].getSendTime().currentSecsSinceEpoch() < messages[i+1].getSendTime().currentSecsSinceEpoch())
-        {
-            filteredMessages.push_back(messages[i]);
+        for (int j = 0; j < messages.size()-1; j++)
+          {
+            if (messages[j].getSendTime().currentSecsSinceEpoch() > messages[j-1].getSendTime().currentSecsSinceEpoch())
+            {
+              Message extraVarialbeToSave = messages[j]; // создали дополнительную переменную
+              messages[j] = messages[j+1]; // меняем местами
+              messages[j] = extraVarialbeToSave; // значения элементов
+            }
         }
     }
-    return filteredMessages;
+
 
 }
