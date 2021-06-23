@@ -11,6 +11,11 @@
 #include <QErrorMessage>
 #include <QMessageBox>
 
+QVector<User> MainWindow::getUsers()
+{
+    return users;
+}
+
 MainWindow::MainWindow(User& currentUser,QVector<User>& users,QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -104,8 +109,6 @@ void MainWindow::on_sendButton_clicked()
         }
     }
 
-    QLabel* pLabel = new QLabel;
-    pLabel->setStyleSheet("QLabel { background-color : black; color : white; }");
 
     ui->messageTextArea->append("\n\n");
     ui->messageTextArea->append(messageText);
