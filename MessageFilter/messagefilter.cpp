@@ -1,24 +1,17 @@
 #include "messagefilter.h"
 
-/*
-* @param QVector<Message> messages - messages to filter
-* @param QDateTime timeBefore - time for filter
-* @return - filtered message list
-*/
-QVector<Message> MessageFilter::getMessagesSentBeforeSelectedTime(QVector<Message> messages, QDateTime timeBefore)
+void MessageFilter::filterByTime(QVector<Message>& messages)
 {
-    QVector<Message> filteredMessages;
-    for (int i = 0 ; i < messages.size();i++)
+    for (int i = 0; i < messages.size() - 1; i++)
     {
-        if (messages[i].getSendTime().currentSecsSinceEpoch() <= timeBefore.currentSecsSinceEpoch())
-        {
-            filteredMessages.push_back(messages[i]);
+        for (int j = 0; j < messages.size() - i - 1; j++)
+        {        
+            if (messages[j].getSendTime() >= messages[j + 1].getSendTime())
+            {
+                Message temp = messages[j];
+                messages[j] = messages[j + 1];
+                messages[j + 1] = temp;
+            }
         }
     }
-    return filteredMessages;
-}
-
-QVector<Message> MessageFilter::filterByTime(QVector<Message> messages, QDateTime date)
-{
-
 }
