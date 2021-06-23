@@ -48,6 +48,14 @@ void MainWindow::on_registrationButton_clicked()
             QMessageBox::warning(this,"Ошибка регистрации","Пароль и логин не могут быть пустыми!",0,1);
             return;
         } else {
+            for(int i = 0; i < users.size();i++)
+            {
+                if(users[i].getLogin() == username)
+                {
+                    QMessageBox::warning(this,"Ошибка регистрации","Пользователь с таким логином уже существует!",0,1);
+                    return;
+                }
+            }
             User newUser(username,password);
             users.push_back(newUser);
             currentUser = newUser;
