@@ -6,22 +6,34 @@
 #include "user.h"
 #include <inputdialog.h>
 
-QVector<User> users;
-User currentUser;
 
-void loadUsers(QVector<User> usersList,QString saveDir);
+
+void saveUsers(QVector<User> usersList);
+void loadUsers(QVector<User> usersList);
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    loadUsers(users,"");
+
+    QVector<User> users;
+    User currentUser;
+    loadUsers(users);
 
     MainWindow w(currentUser,users);
     w.show();
-    return a.exec();
+
+    int exit = a.exec();
+    saveUsers(w.getUsers());
+    return exit;
 }
 
-void loadUsers(QVector<User> usersList,QString saveDir)
+void saveUsers(QVector<User> usersList)
+{
+    int x = 0;
+}
+void loadUsers(QVector<User> usersList)
 {
 
 }
+
+
