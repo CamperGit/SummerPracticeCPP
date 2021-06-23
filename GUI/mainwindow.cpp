@@ -119,3 +119,34 @@ void MainWindow::on_sendButton_clicked()
 
 }
 
+
+void MainWindow::on_loginButton_clicked()
+{
+    bool ok;
+    QStringList list = InputDialog::getStrings(this, &ok);
+    if (ok) {
+        QString username = list[0];
+        QString password = list[1];
+        if (password.isEmpty() || username.isEmpty())
+        {
+            QMessageBox::warning(this,"Ошибка авторизации","Пароль и логин не могут быть пустыми!",0,1);
+            return;
+        } else if(User::verification(users,username,password)){
+            for (int i = 0; i < users.size();i++)
+            {
+                if(users[i].getLogin() == username && users[i].getPassword() == password)
+                {
+                    currentUser = users[i];
+                    ui->comboBox->setEnabled(true);
+                    ui->subjectLineEdit->setEnabled(true);
+                    ui->messageTextArea->setEnabled(true);
+                    ui->sendButton->setEnabled(true);
+                    return;
+                }
+            }
+        } else {
+            QMessageBox::warning(this,"Ошибка авторизации","Неверное имя пользователя или пароль!",0,1);
+        }
+    }
+}
+

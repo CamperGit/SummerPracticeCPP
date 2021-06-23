@@ -69,9 +69,6 @@ void saveUsers(QVector<User> usersList)
     QJsonDocument doc(saveObject);
     QString jsonString = doc.toJson(QJsonDocument::Indented);
 
-
-    QString dir = QCoreApplication::applicationDirPath();
-
     QFile file;
     file.setFileName("save.json");
     file.open(QIODevice::WriteOnly | QIODevice::Text);
