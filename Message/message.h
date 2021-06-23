@@ -28,6 +28,7 @@ public:
     void setSubject(const QString subject);
     void setSenderLogin(const QString senderLogin);
     void setReceiverLogin(const QString receiverLogin);
+    void getGavno();
 };
 
 #endif // MESSAGE_H
