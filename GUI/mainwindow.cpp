@@ -5,11 +5,20 @@
 #include <QFormLayout>
 #include <QDialogButtonBox>
 #include <inputdialog.h>
+#include <user.h>
+//#include <main.cpp>
 
-MainWindow::MainWindow(QWidget *parent)
+QVector<User> MainWindow::getUsers()
+{
+    return users;
+}
+
+MainWindow::MainWindow(User& currentUser,QVector<User>& users,QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+    this->currentUser = currentUser;
+    this->users = users;
     ui->setupUi(this);
 }
 
@@ -24,44 +33,17 @@ void MainWindow::on_pushButton_clicked()
     bool ok;
     QStringList list = InputDialog::getStrings(this, &ok);
     if (ok) {
-        // use list
+        QString username = list[0];
+        QString password = list[1];
+        User newUser(username,password);
+        users.push_back(newUser);
+        currentUser = newUser;
+        ui->comboBox->addItem(username);
     }
-    //QString login = QInputDialog::getText(this, tr("QInputDialog::getText()"),tr("User name:"), QLineEdit::Normal,"", &ok);
-    //QString password = QInputDialog::getText(this, tr("QInputDialog::getText()"),tr("Password:"), QLineEdit::Password,"", &ok);
+}
 
-    /*QDialog dialog(this);
-    // Use a layout allowing to have a label next to each field
-    QFormLayout form(&dialog);
-
-    // Add some text above the fields
-    form.addRow(new QLabel("Username: "));
-
-    // Add the lineEdits with their respective labels
-    QList<QLineEdit *> fields;
-    QLineEdit *usernameLineEdit = new QLineEdit(&dialog);
-    form.addRow("Username:",usernameLineEdit);
-    fields << usernameLineEdit;
-
-    QLineEdit *passwordLineEdit = new QLineEdit(&dialog);
-    form.addRow("Password:",usernameLineEdit);
-    fields << passwordLineEdit;
-
-    // Add some standard buttons (Cancel/Ok) at the bottom of the dialog
-    QDialogButtonBox buttonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel,
-                               Qt::Horizontal, &dialog);
-    form.addRow(&buttonBox);
-    QObject::connect(&buttonBox, SIGNAL(accepted()), &dialog, SLOT(accept()));
-    QObject::connect(&buttonBox, SIGNAL(rejected()), &dialog, SLOT(reject()));
-
-    // Show the dialog as modal
-    if (dialog.exec() == QDialog::Accepted) {
-        QString login = fields.;
-        QString password;
-        // If the user didn't dismiss the dialog, do something with the fields
-        foreach(QLineEdit * lineEdit, fields) {
-            qDebug() << lineEdit->text();
-        }
-    }*/
+void MainWindow::on_comboBox_activated(const QString &arg1)
+{
 
 }
 

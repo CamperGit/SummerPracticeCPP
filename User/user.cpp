@@ -20,6 +20,11 @@ User::User(const QString login, const QString password, const QVector<Message> m
     this->messages = messages;
 }
 
+QString User::getLogin()
+{
+    return login;
+}
+
 QVector<Message> User::getMessages()
 {
     return messages;
