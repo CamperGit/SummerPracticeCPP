@@ -97,7 +97,7 @@ void MainWindow::on_registrationButton_clicked()
     bool ok;
     QStringList list = InputDialog::getStrings(this, &ok);
     if (ok) {
-        QString username = list[0];
+        QString username = list[0].trimmed();
         QString password = list[1];
 
         if (password.isEmpty() || username.isEmpty())
