@@ -32,7 +32,6 @@ int main(int argc, char *argv[])
 void saveUsers(QVector<User> usersList)
 {
     QJsonObject saveObject;
-    saveObject;
 
     QJsonArray usersArray;
 

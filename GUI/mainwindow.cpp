@@ -23,6 +23,14 @@ MainWindow::MainWindow(User& currentUser,QVector<User>& users,QWidget *parent)
     this->currentUser = currentUser;
     this->users = users;
     ui->setupUi(this);
+    int size;
+    if((size = users.size()) != 0)
+    {
+        for(int i = 0; i < size; i++)
+        {
+            ui->comboBox->addItem(users[i].getLogin());
+        }
+    }
 }
 
 MainWindow::~MainWindow()
@@ -65,6 +73,7 @@ void MainWindow::on_registrationButton_clicked()
             ui->subjectLineEdit->setEnabled(true);
             ui->messageTextArea->setEnabled(true);
             ui->sendButton->setEnabled(true);
+            ui->messageList->clear();
         }
     }
 }
@@ -142,19 +151,15 @@ void MainWindow::on_loginButton_clicked()
                     ui->messageTextArea->setEnabled(true);
                     ui->sendButton->setEnabled(true);
 
+                    ui->messageList->clear();
+
                     QVector<Message> messages = currentUser.getMessages();
                     for(int j = 0; j< messages.size(); j++)
                     {
                         Message messageToShow = messages[j];
                         QWidget *line = new QWidget;
                         QLayout *vbox = new QVBoxLayout;
-
-                        QFrame *separatorLine = new QFrame(this);
-                        separatorLine->setFrameShape(QFrame::HLine);
-                        separatorLine->setFrameShadow(QFrame::Sunken);
-                        separatorLine->setLineWidth(2);
                         vbox->setSpacing(0);
-                        vbox->addWidget(separatorLine);
 
                         QLabel *senderLogin = new QLabel(messageToShow.getSenderLogin());
                         QLabel *timeLabel = new QLabel(messageToShow.getSendTime().toString("yyyy-MM-dd  HH:mm"));
@@ -162,13 +167,17 @@ void MainWindow::on_loginButton_clicked()
 
                         QWidget *hboxWidget = new QWidget;
                         QLayout *hbox = new QHBoxLayout;
-                        hboxWidget->setMaximumHeight(10);
                         hbox->addWidget(senderLogin);
                         hbox->addWidget(timeLabel);
                         hboxWidget->setLayout(hbox);
 
                         vbox->addWidget(hboxWidget);
                         vbox->addWidget(subjectLabel);
+
+                        QFrame *separatorLine = new QFrame(this);
+                        separatorLine->setFrameShape(QFrame::HLine);
+                        separatorLine->setFrameShadow(QFrame::Sunken);
+                        separatorLine->setLineWidth(2);
                         vbox->addWidget(separatorLine);
 
                         line->setLayout(vbox);
