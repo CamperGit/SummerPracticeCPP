@@ -4,33 +4,42 @@
 #include <QLineEdit>
 #include <QDialogButtonBox>
 #include <QFormLayout>
+#include <QPushButton>
 
 InputDialog::InputDialog(QWidget *parent) : QDialog(parent)
 {
+    QString defaultColorStrStylesheet = "color: rgb(185, 185, 185);";
+
     QFormLayout *lytMain = new QFormLayout(this);
 
     QLabel *usernameLabel = new QLabel("Username: ");
     QLineEdit *usernameLineEdit = new QLineEdit(this);
     lytMain->addRow(usernameLabel,usernameLineEdit);
     fields << usernameLineEdit;
-    usernameLineEdit->setStyleSheet("color: rgb(185, 185, 185);");
-
-    usernameLabel->setStyleSheet("color: rgb(185, 185, 185);");
+    usernameLineEdit->setMaxLength(16);
+    usernameLineEdit->setStyleSheet(defaultColorStrStylesheet);
+    usernameLabel->setStyleSheet(defaultColorStrStylesheet);
 
     QLabel *passwordLabel = new QLabel("Password: ");
     QLineEdit *passwordLineEdit = new QLineEdit();
     passwordLineEdit->setEchoMode(QLineEdit::Password);
+    passwordLineEdit->setMaxLength(16);
     lytMain->addRow(passwordLabel,passwordLineEdit);
     fields << passwordLineEdit;
-    passwordLineEdit->setStyleSheet("color: rgb(185, 185, 185);");
+    passwordLineEdit->setStyleSheet(defaultColorStrStylesheet);
+    passwordLabel->setStyleSheet(defaultColorStrStylesheet);
 
-    passwordLabel->setStyleSheet("color: rgb(185, 185, 185);");
 
     QDialogButtonBox *buttonBox = new QDialogButtonBox
             ( QDialogButtonBox::Ok | QDialogButtonBox::Cancel,
               Qt::Horizontal, this );
+    QPushButton *okBut = buttonBox->button(QDialogButtonBox::Ok);
+    QPushButton *cancelBut = buttonBox->button(QDialogButtonBox::Cancel);
+    okBut->setStyleSheet(defaultColorStrStylesheet);
+    cancelBut->setStyleSheet(defaultColorStrStylesheet);
+
     lytMain->addWidget(buttonBox);
-    buttonBox->setStyleSheet("color: rgb(185, 185, 185);");
+    buttonBox->setStyleSheet(defaultColorStrStylesheet);
     buttonBox->setStyleSheet("background-color: rgb(61, 61, 61)");
 
     bool conn = connect(buttonBox, &QDialogButtonBox::accepted,

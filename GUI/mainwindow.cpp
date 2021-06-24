@@ -14,7 +14,6 @@
 #include <QMessageBox>
 #include <QVariant>
 
-
 int MainWindow::addMessagesToMessageList(QVector<Message> messagesToAdd)
 {
     int counter = 0;
@@ -220,6 +219,9 @@ void MainWindow::on_sendButton_clicked()
         if (users[i].getLogin() == toLoginText)
         {
             users[i].addMessage(newMessage);
+            ui->subjectLineEdit->setText("");
+            ui->messageTextArea->setText("");
+            return;
         }
     }
 
@@ -227,12 +229,6 @@ void MainWindow::on_sendButton_clicked()
 
 void MainWindow::on_messageList_itemClicked(QListWidgetItem *item)
 {
-
-    //line->setLayout(vbox);
-    //line->setProperty("message",QVariant::fromValue(messageToShow));
-    //QListWidgetItem *item = new QListWidgetItem(ui->messageList);
-    //item->setSizeHint(line->sizeHint());
-    //ui->messageList->setItemWidget();
     QWidget *lineWidget = ui->messageList->itemWidget(item);
     QVariant messageVar = lineWidget->property("message");
     if(messageVar.canConvert<Message>())
@@ -247,10 +243,6 @@ void MainWindow::on_messageList_itemClicked(QListWidgetItem *item)
     } else {
         //error
     }
-
-
-
-
 }
 
 
