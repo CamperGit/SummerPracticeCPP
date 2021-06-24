@@ -188,7 +188,7 @@ void MainWindow::on_loginButton_clicked()
 
 void MainWindow::on_sendButton_clicked()
 {
-    QString messageText = ui->messageTextArea->toPlainText();
+    QString messageText = ui->messageTextArea->toPlainText().trimmed();
     if (messageText.isEmpty())
     {
         QMessageBox::warning(this,"Ошибка отправки сообщения","Текст сообщения не может быть пустым!",0,1);
@@ -201,7 +201,7 @@ void MainWindow::on_sendButton_clicked()
     QDateTime currentTime = QDateTime::currentDateTime();
 
 
-    QString subjectText = ui->subjectLineEdit->text();
+    QString subjectText = ui->subjectLineEdit->text().trimmed();
     if (subjectText.isEmpty())
     {
         QMessageBox::warning(this,"Ошибка отправки сообщения","Тема сообщения не может быть пустой!",0,1);
