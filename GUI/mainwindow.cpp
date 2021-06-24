@@ -117,13 +117,6 @@ void MainWindow::on_sendButton_clicked()
         }
     }
 
-    /*ui->messageTextArea->append("\n\n");
-    ui->messageTextArea->append(messageText);
-    ui->messageTextArea->append(currentTime.toString("yyyy-MM-dd  HH:mm:ss"));
-    ui->messageTextArea->append(subjectText);
-    ui->messageTextArea->append(fromLoginText);
-    ui->messageTextArea->append(toLoginText);*/
-
 }
 
 
@@ -156,24 +149,26 @@ void MainWindow::on_loginButton_clicked()
                         QWidget *line = new QWidget;
                         QLayout *vbox = new QVBoxLayout;
 
+                        QFrame *separatorLine = new QFrame(this);
+                        separatorLine->setFrameShape(QFrame::HLine);
+                        separatorLine->setFrameShadow(QFrame::Sunken);
+                        separatorLine->setLineWidth(2);
+                        vbox->setSpacing(0);
+                        vbox->addWidget(separatorLine);
+
                         QLabel *senderLogin = new QLabel(messageToShow.getSenderLogin());
                         QLabel *timeLabel = new QLabel(messageToShow.getSendTime().toString("yyyy-MM-dd  HH:mm"));
                         QLabel *subjectLabel = new QLabel(messageToShow.getSubject());
 
                         QWidget *hboxWidget = new QWidget;
                         QLayout *hbox = new QHBoxLayout;
+                        hboxWidget->setMaximumHeight(10);
                         hbox->addWidget(senderLogin);
                         hbox->addWidget(timeLabel);
                         hboxWidget->setLayout(hbox);
 
                         vbox->addWidget(hboxWidget);
                         vbox->addWidget(subjectLabel);
-
-
-                        QFrame *separatorLine = new QFrame(this);
-                        separatorLine->setFrameShape(QFrame::HLine);
-                        separatorLine->setFrameShadow(QFrame::Sunken);
-                        separatorLine->setLineWidth(2);
                         vbox->addWidget(separatorLine);
 
                         line->setLayout(vbox);
@@ -189,5 +184,11 @@ void MainWindow::on_loginButton_clicked()
             return;
         }
     }
+}
+
+
+void MainWindow::on_messageList_itemClicked(QListWidgetItem *item)
+{
+    //ui->messageTextArea->append("gavno");
 }
 

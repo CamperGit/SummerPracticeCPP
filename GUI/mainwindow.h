@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QVector>
+#include <QListWidgetItem>
 #include <user.h>
 
 QT_BEGIN_NAMESPACE
@@ -26,6 +27,8 @@ private slots:
     void on_sendButton_clicked();
 
     void on_loginButton_clicked();
+
+    void on_messageList_itemClicked(QListWidgetItem *item);
 
 private:
     User currentUser;
