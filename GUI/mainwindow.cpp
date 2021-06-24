@@ -96,6 +96,7 @@ void MainWindow::on_registrationButton_clicked()
     if (ok) {
         QString username = list[0];
         QString password = list[1];
+
         if (password.isEmpty() || username.isEmpty())
         {
             QMessageBox::warning(this,"Ошибка регистрации","Пароль и логин не могут быть пустыми!",0,1);
@@ -103,12 +104,27 @@ void MainWindow::on_registrationButton_clicked()
         } else {
             for(int i = 0; i < users.size();i++)
             {
+                QString forbidden = "-&=+,<>'";
+                if(username.size()>18)
+                {
+                    QMessageBox::warning(this,"Ошибка регистрации","Слишком длинное имя пользователя!",0,1);
+                    return;
+                }
                 if(users[i].getLogin() == username)
                 {
                     QMessageBox::warning(this,"Ошибка регистрации","Пользователь с таким логином уже существует!",0,1);
                     return;
                 }
+                for(int i = 0; i < username.size();i++)
+                {
+                    if(username[i]=='-'||username[i]=='&'||username[i]=='+'||username[i]=='='||username[i]==','||username[i]=='<'||username[i]=='>')
+                    {
+                        QMessageBox::warning(this,"Ошибка регистрации","Имя пользователя содержит недопустимые символы!",0,1);
+                        return;
+                    }
+                }
             }
+
             User newUser(username,password);
             users.push_back(newUser);
             currentUser = newUser;
@@ -174,6 +190,11 @@ void MainWindow::on_sendButton_clicked()
     if (subjectText.isEmpty())
     {
         QMessageBox::warning(this,"Ошибка отправки сообщения","Тема сообщения не может быть пустой!",0,1);
+        return;
+    }
+    if (subjectText.size()>35)
+    {
+        QMessageBox::warning(this,"Ошибка отправки сообщения","Размер темы содержит слишком много символов!",0,1);
         return;
     }
 
