@@ -301,7 +301,7 @@ void MainWindow::on_logoutButton_clicked()
 
     ui->messageTextArea->setEnabled(false);
     ui->subjectLineEdit->setEnabled(false);
-    ui->messageTextArea->setText("");
+    ui->subjectLineEdit->setText("");
     ui->messageTextArea->setText("");
     ui->messageList->clear();
     currentUser = User();
