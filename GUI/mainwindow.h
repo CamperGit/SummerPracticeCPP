@@ -15,6 +15,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
+    int addMessagesToMessageList(QVector<Message> messagesToAdd);
     QVector<User> getUsers();
     MainWindow(User& currentUser,QVector<User>& users,QWidget *parent = nullptr);
     ~MainWindow();
@@ -29,6 +30,8 @@ private slots:
     void on_loginButton_clicked();
 
     void on_messageList_itemClicked(QListWidgetItem *item);
+
+    void on_alphabetUpDownSortButton_clicked();
 
 private:
     User currentUser;

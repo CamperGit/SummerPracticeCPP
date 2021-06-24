@@ -12,6 +12,49 @@
 #include <QMessageBox>
 #include "messagefilter.h"
 
+
+int MainWindow::addMessagesToMessageList(QVector<Message> messagesToAdd)
+{
+    int counter = 0;
+    ui->messageList->clear();
+
+    QVector<Message> messages = currentUser.getMessages();
+    for(int j = 0; j< messages.size(); j++)
+    {
+        Message messageToShow = messages[j];
+        QWidget *line = new QWidget;
+        QLayout *vbox = new QVBoxLayout;
+        vbox->setSpacing(0);
+
+        QLabel *senderLogin = new QLabel(messageToShow.getSenderLogin());
+        QLabel *timeLabel = new QLabel(messageToShow.getSendTime().toString("yyyy-MM-dd  HH:mm"));
+        QLabel *subjectLabel = new QLabel(messageToShow.getSubject());
+
+        QWidget *hboxWidget = new QWidget;
+        QLayout *hbox = new QHBoxLayout;
+        hbox->addWidget(senderLogin);
+        hbox->addWidget(timeLabel);
+        hboxWidget->setLayout(hbox);
+
+        vbox->addWidget(hboxWidget);
+        vbox->addWidget(subjectLabel);
+
+        QFrame *separatorLine = new QFrame(this);
+        separatorLine->setFrameShape(QFrame::HLine);
+        separatorLine->setFrameShadow(QFrame::Sunken);
+        separatorLine->setLineWidth(2);
+        vbox->addWidget(separatorLine);
+
+        line->setLayout(vbox);
+
+        QListWidgetItem *item = new QListWidgetItem(ui->messageList);
+        item->setSizeHint(line->sizeHint());
+        ui->messageList->setItemWidget(item,line);
+        counter++;
+    }
+    return counter;
+}
+
 QVector<User> MainWindow::getUsers()
 {
     return users;
@@ -79,6 +122,37 @@ void MainWindow::on_registrationButton_clicked()
     }
 }
 
+void MainWindow::on_loginButton_clicked()
+{
+    bool ok;
+    QStringList list = InputDialog::getStrings(this, &ok);
+    if (ok) {
+        QString username = list[0];
+        QString password = list[1];
+        if (password.isEmpty() || username.isEmpty())
+        {
+            QMessageBox::warning(this,"Ошибка авторизации","Пароль и логин не могут быть пустыми!",0,1);
+            return;
+        } else if(User::verification(users,username,password)){
+            for (int i = 0; i < users.size();i++)
+            {
+                if(users[i].getLogin() == username && users[i].getPassword() == password)
+                {
+                    currentUser = users[i];
+                    ui->comboBox->setEnabled(true);
+                    ui->subjectLineEdit->setEnabled(true);
+                    ui->messageTextArea->setEnabled(true);
+                    ui->sendButton->setEnabled(true);
+
+                    addMessagesToMessageList(currentUser.getMessages());
+                }
+            }
+        } else {
+            QMessageBox::warning(this,"Ошибка авторизации","Неверное имя пользователя или пароль!",0,1);
+            return;
+        }
+    }
+}
 
 void MainWindow::on_sendButton_clicked()
 {
@@ -129,74 +203,6 @@ void MainWindow::on_sendButton_clicked()
 
 }
 
-
-void MainWindow::on_loginButton_clicked()
-{
-    bool ok;
-    QStringList list = InputDialog::getStrings(this, &ok);
-    if (ok) {
-        QString username = list[0];
-        QString password = list[1];
-        if (password.isEmpty() || username.isEmpty())
-        {
-            QMessageBox::warning(this,"Ошибка авторизации","Пароль и логин не могут быть пустыми!",0,1);
-            return;
-        } else if(User::verification(users,username,password)){
-            for (int i = 0; i < users.size();i++)
-            {
-                if(users[i].getLogin() == username && users[i].getPassword() == password)
-                {
-                    currentUser = users[i];
-                    ui->comboBox->setEnabled(true);
-                    ui->subjectLineEdit->setEnabled(true);
-                    ui->messageTextArea->setEnabled(true);
-                    ui->sendButton->setEnabled(true);
-
-                    ui->messageList->clear();
-
-                    QVector<Message> messages = currentUser.getMessages();
-                    for(int j = 0; j< messages.size(); j++)
-                    {
-                        Message messageToShow = messages[j];
-                        QWidget *line = new QWidget;
-                        QLayout *vbox = new QVBoxLayout;
-                        vbox->setSpacing(0);
-
-                        QLabel *senderLogin = new QLabel(messageToShow.getSenderLogin());
-                        QLabel *timeLabel = new QLabel(messageToShow.getSendTime().toString("yyyy-MM-dd  HH:mm"));
-                        QLabel *subjectLabel = new QLabel(messageToShow.getSubject());
-
-                        QWidget *hboxWidget = new QWidget;
-                        QLayout *hbox = new QHBoxLayout;
-                        hbox->addWidget(senderLogin);
-                        hbox->addWidget(timeLabel);
-                        hboxWidget->setLayout(hbox);
-
-                        vbox->addWidget(hboxWidget);
-                        vbox->addWidget(subjectLabel);
-
-                        QFrame *separatorLine = new QFrame(this);
-                        separatorLine->setFrameShape(QFrame::HLine);
-                        separatorLine->setFrameShadow(QFrame::Sunken);
-                        separatorLine->setLineWidth(2);
-                        vbox->addWidget(separatorLine);
-
-                        line->setLayout(vbox);
-
-                        QListWidgetItem *item = new QListWidgetItem(ui->messageList);
-                        item->setSizeHint(line->sizeHint());
-                        ui->messageList->setItemWidget(item,line);
-                    }
-                }
-            }
-        } else {
-            QMessageBox::warning(this,"Ошибка авторизации","Неверное имя пользователя или пароль!",0,1);
-            return;
-        }
-    }
-}
-
-
 void MainWindow::on_messageList_itemClicked(QListWidgetItem *item)
 {
     //ui->messageTextArea->append("gavno");
@@ -207,5 +213,6 @@ void MainWindow::on_alphabetUpDownSortButton_clicked()
 {
     QVector<Message> messages = currentUser.getMessages();
     MessageFilter::filterByAlphabetBigToSmall(messages);
+    addMessagesToMessageList(messages);
 }
 
