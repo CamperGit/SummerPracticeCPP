@@ -19,6 +19,7 @@ InputDialog::InputDialog(QWidget *parent) : QDialog(parent)
 
     QLabel *passwordLabel = new QLabel("Password: ");
     QLineEdit *passwordLineEdit = new QLineEdit();
+    passwordLineEdit->setEchoMode(QLineEdit::Password);
     lytMain->addRow(passwordLabel,passwordLineEdit);
     fields << passwordLineEdit;
     passwordLineEdit->setStyleSheet("color: rgb(185, 185, 185);");
