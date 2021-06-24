@@ -7,10 +7,12 @@
 #include <inputdialog.h>
 #include <user.h>
 #include <message.h>
+#include "messagefilter.h"
+#include "messagereader.h"
 #include <QtGui>
 #include <QErrorMessage>
 #include <QMessageBox>
-#include "messagefilter.h"
+#include <QVariant>
 
 
 int MainWindow::addMessagesToMessageList(QVector<Message> messagesToAdd)
@@ -18,10 +20,9 @@ int MainWindow::addMessagesToMessageList(QVector<Message> messagesToAdd)
     int counter = 0;
     ui->messageList->clear();
 
-    QVector<Message> messages = currentUser.getMessages();
-    for(int j = 0; j< messages.size(); j++)
+    for(int j = 0; j< messagesToAdd.size(); j++)
     {
-        Message messageToShow = messages[j];
+        Message messageToShow = messagesToAdd[j];
         QWidget *line = new QWidget;
         QLayout *vbox = new QVBoxLayout;
         vbox->setSpacing(0);
@@ -46,7 +47,7 @@ int MainWindow::addMessagesToMessageList(QVector<Message> messagesToAdd)
         vbox->addWidget(separatorLine);
 
         line->setLayout(vbox);
-
+        line->setProperty("message",QVariant::fromValue(messageToShow));
         QListWidgetItem *item = new QListWidgetItem(ui->messageList);
         item->setSizeHint(line->sizeHint());
         ui->messageList->setItemWidget(item,line);
@@ -205,7 +206,30 @@ void MainWindow::on_sendButton_clicked()
 
 void MainWindow::on_messageList_itemClicked(QListWidgetItem *item)
 {
-    //ui->messageTextArea->append("gavno");
+
+    //line->setLayout(vbox);
+    //line->setProperty("message",QVariant::fromValue(messageToShow));
+    //QListWidgetItem *item = new QListWidgetItem(ui->messageList);
+    //item->setSizeHint(line->sizeHint());
+    //ui->messageList->setItemWidget();
+    QWidget *lineWidget = ui->messageList->itemWidget(item);
+    QVariant messageVar = lineWidget->property("message");
+    if(messageVar.canConvert<Message>())
+    {
+        Message message = messageVar.value<Message>();
+        QString text = message.getText();
+        QString time = message.getSendTime().toString("yyyy-MM-dd  HH:mm");
+        QString subject = message.getSubject();
+        MessageReader window(text,time,subject);
+        window.setModal(true);
+        window.exec();
+    } else {
+        //error
+    }
+
+
+
+
 }
 
 

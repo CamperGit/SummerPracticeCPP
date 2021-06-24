@@ -11,14 +11,17 @@ CONFIG += c++11
 SOURCES += \
     inputdialog.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    messagereader.cpp
 
 HEADERS += \
     inputdialog.h \
-    mainwindow.h
+    mainwindow.h \
+    messagereader.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    messagereader.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
