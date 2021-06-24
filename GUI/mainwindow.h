@@ -33,6 +33,12 @@ private slots:
 
     void on_alphabetUpDownSortButton_clicked();
 
+    void on_alphabetDownUpSortButton_clicked();
+
+    void on_timeDownUpSortButton_clicked();
+
+    void on_timeUpDownSortButton_clicked();
+
 private:
     User currentUser;
     QVector<User> users;

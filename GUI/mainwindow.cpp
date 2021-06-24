@@ -253,3 +253,25 @@ void MainWindow::on_alphabetUpDownSortButton_clicked()
     addMessagesToMessageList(messages);
 }
 
+void MainWindow::on_alphabetDownUpSortButton_clicked()
+{
+    QVector<Message> messages = currentUser.getMessages();
+    MessageFilter::filterByAlphabetSmallToBig(messages);
+    addMessagesToMessageList(messages);
+}
+
+void MainWindow::on_timeDownUpSortButton_clicked()
+{
+    QVector<Message> messages = currentUser.getMessages();
+    MessageFilter::filterByTimeSmallToBig(messages);
+    addMessagesToMessageList(messages);
+}
+
+
+void MainWindow::on_timeUpDownSortButton_clicked()
+{
+    QVector<Message> messages = currentUser.getMessages();
+    MessageFilter::filterByTimeBigToSmall(messages);
+    addMessagesToMessageList(messages);
+}
+
