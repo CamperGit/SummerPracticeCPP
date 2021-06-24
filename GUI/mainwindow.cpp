@@ -149,28 +149,44 @@ void MainWindow::on_loginButton_clicked()
                     ui->messageTextArea->setEnabled(true);
                     ui->sendButton->setEnabled(true);
 
-                    //QWidget *widget = new QWidget;
-                    QHBoxLayout *lineHBox = new QHBoxLayout(ui->messageList);
-                    QLabel *userLabel = new QLabel(currentUser.getLogin());
                     QVector<Message> messages = currentUser.getMessages();
-                    for(int j = 0; j < messages.size();j++)
+                    for(int j = 0; j< messages.size(); j++)
                     {
-                        QLabel *messageTimeLabel = new QLabel(messages[j].getSendTime().toString("yyyy-MM-dd  HH:mm:ss"));
-                        lineHBox->addWidget(userLabel);
-                        lineHBox->addWidget(messageTimeLabel);
+                        Message messageToShow = messages[j];
+                        QWidget *line = new QWidget;
+                        QLayout *vbox = new QVBoxLayout;
 
-                        QListWidgetItem *itm = new QListWidgetItem;
-                        //QVariant line  = QVariant::fromValue(messages[j]);
-                        itm->setData(0,QVariant::fromValue(lineHBox));
-                        ui->messageList->addItem(itm);
-                        //ui->messageList->addItem()
-                        //ui->messageList->addItem(messages[i].getSubject());
+                        QLabel *senderLogin = new QLabel(messageToShow.getSenderLogin());
+                        QLabel *timeLabel = new QLabel(messageToShow.getSendTime().toString("yyyy-MM-dd  HH:mm"));
+                        QLabel *subjectLabel = new QLabel(messageToShow.getSubject());
+
+                        QWidget *hboxWidget = new QWidget;
+                        QLayout *hbox = new QHBoxLayout;
+                        hbox->addWidget(senderLogin);
+                        hbox->addWidget(timeLabel);
+                        hboxWidget->setLayout(hbox);
+
+                        vbox->addWidget(hboxWidget);
+                        vbox->addWidget(subjectLabel);
+
+
+                        QFrame *separatorLine = new QFrame(this);
+                        separatorLine->setFrameShape(QFrame::HLine);
+                        separatorLine->setFrameShadow(QFrame::Sunken);
+                        separatorLine->setLineWidth(2);
+                        vbox->addWidget(separatorLine);
+
+                        line->setLayout(vbox);
+
+                        QListWidgetItem *item = new QListWidgetItem(ui->messageList);
+                        item->setSizeHint(line->sizeHint());
+                        ui->messageList->setItemWidget(item,line);
                     }
-                    return;
                 }
             }
         } else {
             QMessageBox::warning(this,"Ошибка авторизации","Неверное имя пользователя или пароль!",0,1);
+            return;
         }
     }
 }
