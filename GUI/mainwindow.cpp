@@ -237,6 +237,7 @@ void MainWindow::on_sendButton_clicked()
             users[i].addMessage(newMessage);
             ui->subjectLineEdit->setText("");
             ui->messageTextArea->setText("");
+            QMessageBox::information(this,"","Сообщение пользователю " + toLoginText + " отправлено!");
             return;
         }
     }
@@ -290,7 +291,6 @@ void MainWindow::on_timeUpDownSortButton_clicked()
     MessageFilter::filterByTimeBigToSmall(messages);
     addMessagesToMessageList(messages);
 }
-
 
 void MainWindow::on_logoutButton_clicked()
 {
