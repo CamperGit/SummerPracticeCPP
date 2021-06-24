@@ -131,7 +131,7 @@ background-color: rgb(58, 58, 58);</string>
 background-color: rgb(33, 33, 33);</string>
       </property>
       <property name="text">
-       <string>Сорт. время 1-9</string>
+       <string>Сначала старые</string>
       </property>
      </widget>
     </item>
@@ -167,7 +167,7 @@ background-color: rgb(33, 33, 33);</string>
 background-color: rgb(33, 33, 33);</string>
       </property>
       <property name="text">
-       <string>Сорт. время 9-1</string>
+       <string>Сначала новые</string>
       </property>
      </widget>
     </item>
