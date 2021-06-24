@@ -39,6 +39,8 @@ private slots:
 
     void on_timeUpDownSortButton_clicked();
 
+    void on_logoutButton_clicked();
+
 private:
     User currentUser;
     QVector<User> users;

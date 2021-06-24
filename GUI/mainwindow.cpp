@@ -75,6 +75,10 @@ MainWindow::MainWindow(User& currentUser,QVector<User>& users,QWidget *parent)
             ui->comboBox->addItem(users[i].getLogin());
         }
     }
+    ui->usernameLabel->setVisible(false);
+    ui->logoutButton->setVisible(false);
+    ui->loginButton->setVisible(true);
+    ui->registrationButton->setVisible(true);
 }
 
 MainWindow::~MainWindow()
@@ -134,6 +138,12 @@ void MainWindow::on_registrationButton_clicked()
             ui->messageTextArea->setEnabled(true);
             ui->sendButton->setEnabled(true);
             ui->messageList->clear();
+
+            ui->usernameLabel->setVisible(true);
+            ui->logoutButton->setVisible(true);
+            ui->loginButton->setVisible(false);
+            ui->registrationButton->setVisible(false);
+            ui->usernameLabel->setText(currentUser.getLogin());
         }
     }
 }
@@ -161,6 +171,12 @@ void MainWindow::on_loginButton_clicked()
                     ui->sendButton->setEnabled(true);
 
                     addMessagesToMessageList(currentUser.getMessages());
+                    ui->usernameLabel->setVisible(true);
+                    ui->logoutButton->setVisible(true);
+                    ui->loginButton->setVisible(false);
+                    ui->registrationButton->setVisible(false);
+                    ui->usernameLabel->setText(currentUser.getLogin());
+                    return;
                 }
             }
         } else {
@@ -273,5 +289,15 @@ void MainWindow::on_timeUpDownSortButton_clicked()
     QVector<Message> messages = currentUser.getMessages();
     MessageFilter::filterByTimeBigToSmall(messages);
     addMessagesToMessageList(messages);
+}
+
+
+void MainWindow::on_logoutButton_clicked()
+{
+    ui->usernameLabel->setVisible(false);
+    ui->logoutButton->setVisible(false);
+    ui->loginButton->setVisible(true);
+    ui->registrationButton->setVisible(true);
+    currentUser = User();
 }
 
