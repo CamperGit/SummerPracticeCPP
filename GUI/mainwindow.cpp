@@ -149,13 +149,20 @@ void MainWindow::on_loginButton_clicked()
                     ui->messageTextArea->setEnabled(true);
                     ui->sendButton->setEnabled(true);
 
+                    //QWidget *widget = new QWidget;
+                    QHBoxLayout *lineHBox = new QHBoxLayout(ui->messageList);
+                    QLabel *userLabel = new QLabel(currentUser.getLogin());
                     QVector<Message> messages = currentUser.getMessages();
                     for(int j = 0; j < messages.size();j++)
                     {
+                        QLabel *messageTimeLabel = new QLabel(messages[j].getSendTime().toString("yyyy-MM-dd  HH:mm:ss"));
+                        lineHBox->addWidget(userLabel);
+                        lineHBox->addWidget(messageTimeLabel);
+
                         QListWidgetItem *itm = new QListWidgetItem;
-                        QVariant line  = QVariant::fromValue(messages[j]);
-                        itm->setData(1,line);
-                        //ui->messageList->addItem(itm);
+                        //QVariant line  = QVariant::fromValue(messages[j]);
+                        itm->setData(0,QVariant::fromValue(lineHBox));
+                        ui->messageList->addItem(itm);
                         //ui->messageList->addItem()
                         //ui->messageList->addItem(messages[i].getSubject());
                     }

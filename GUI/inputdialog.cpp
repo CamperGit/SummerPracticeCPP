@@ -13,16 +13,24 @@ InputDialog::InputDialog(QWidget *parent) : QDialog(parent)
     QLineEdit *usernameLineEdit = new QLineEdit(this);
     lytMain->addRow(usernameLabel,usernameLineEdit);
     fields << usernameLineEdit;
+    usernameLineEdit->setStyleSheet("color: rgb(185, 185, 185);");
+
+    usernameLabel->setStyleSheet("color: rgb(185, 185, 185);");
 
     QLabel *passwordLabel = new QLabel("Password: ");
     QLineEdit *passwordLineEdit = new QLineEdit();
     lytMain->addRow(passwordLabel,passwordLineEdit);
     fields << passwordLineEdit;
+    passwordLineEdit->setStyleSheet("color: rgb(185, 185, 185);");
+
+    passwordLabel->setStyleSheet("color: rgb(185, 185, 185);");
 
     QDialogButtonBox *buttonBox = new QDialogButtonBox
             ( QDialogButtonBox::Ok | QDialogButtonBox::Cancel,
               Qt::Horizontal, this );
     lytMain->addWidget(buttonBox);
+    buttonBox->setStyleSheet("color: rgb(185, 185, 185);");
+    buttonBox->setStyleSheet("background-color: rgb(61, 61, 61)");
 
     bool conn = connect(buttonBox, &QDialogButtonBox::accepted,
                    this, &InputDialog::accept);
