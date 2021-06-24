@@ -298,8 +298,12 @@ void MainWindow::on_logoutButton_clicked()
     ui->logoutButton->setVisible(false);
     ui->loginButton->setVisible(true);
     ui->registrationButton->setVisible(true);
+
     ui->messageTextArea->setEnabled(false);
     ui->subjectLineEdit->setEnabled(false);
+    ui->messageTextArea->setText("");
+    ui->messageTextArea->setText("");
+    ui->messageList->clear();
     currentUser = User();
 }
 
