@@ -10,6 +10,7 @@
 #include <QtGui>
 #include <QErrorMessage>
 #include <QMessageBox>
+#include "messagefilter.h"
 
 QVector<User> MainWindow::getUsers()
 {
@@ -199,5 +200,12 @@ void MainWindow::on_loginButton_clicked()
 void MainWindow::on_messageList_itemClicked(QListWidgetItem *item)
 {
     //ui->messageTextArea->append("gavno");
+}
+
+
+void MainWindow::on_alphabetUpDownSortButton_clicked()
+{
+    QVector<Message> messages = currentUser.getMessages();
+    MessageFilter::filterByAlphabetBigToSmall(messages);
 }
 
