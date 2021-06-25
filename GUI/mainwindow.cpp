@@ -28,7 +28,7 @@ int MainWindow::addMessagesToMessageList(QVector<Message> messagesToAdd)
         QLayout *vbox = new QVBoxLayout;
         vbox->setSpacing(0);
 
-        QLabel *senderLogin = new QLabel(messageToShow.getSenderLogin());
+        QLabel *senderLogin = new QLabel("От: " + messageToShow.getSenderLogin());
         QLabel *timeLabel = new QLabel(messageToShow.getSendTime().toString("yyyy-MM-dd  HH:mm"));
         QLabel *subjectLabel = new QLabel(messageToShow.getSubject());
 
