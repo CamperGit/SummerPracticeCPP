@@ -13,11 +13,16 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">color: rgb(200, 200, 200);
+background-color: rgb(0, 64, 93);
+font: 8pt &quot;Century Gothic&quot;;</string>
+  </property>
   <widget class="QLabel" name="timeLabel">
    <property name="geometry">
     <rect>
-     <x>276</x>
-     <y>-1</y>
+     <x>270</x>
+     <y>20</y>
      <width>121</width>
      <height>31</height>
     </rect>
@@ -29,9 +34,9 @@
   <widget class="QLabel" name="subjectLabel">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>251</width>
+     <x>20</x>
+     <y>20</y>
+     <width>211</width>
      <height>31</height>
     </rect>
    </property>
@@ -47,6 +52,11 @@
      <width>371</width>
      <height>211</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(185, 185, 185);
+background-color: rgb(0, 36, 53);
+font: 8pt &quot;Century Gothic&quot;;</string>
    </property>
    <property name="readOnly">
     <bool>true</bool>
