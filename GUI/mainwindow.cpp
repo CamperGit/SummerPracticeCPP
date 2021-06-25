@@ -30,16 +30,21 @@ int MainWindow::addMessagesToMessageList(QVector<Message> messagesToAdd)
 
         QLabel *senderLogin = new QLabel("От: " + messageToShow.getSenderLogin());
         QLabel *timeLabel = new QLabel(messageToShow.getSendTime().toString("yyyy-MM-dd  HH:mm"));
-        QLabel *subjectLabel = new QLabel(messageToShow.getSubject());
+        QLabel *subjectLabel = new QLabel("Тема: " + messageToShow.getSubject());
 
-        QWidget *hboxWidget = new QWidget;
-        QLayout *hbox = new QHBoxLayout;
-        hbox->addWidget(senderLogin);
-        hbox->addWidget(timeLabel);
-        hboxWidget->setLayout(hbox);
+        QWidget *upperHBoxWidget = new QWidget;
+        QLayout *upperHBox = new QHBoxLayout;
+        upperHBox->addWidget(senderLogin);
+        upperHBox->addWidget(timeLabel);
+        upperHBoxWidget->setLayout(upperHBox);
 
-        vbox->addWidget(hboxWidget);
-        vbox->addWidget(subjectLabel);
+        QWidget *bottomHBoxWidget = new QWidget;
+        QLayout *bottomHBox = new QHBoxLayout;
+        bottomHBox->addWidget(subjectLabel);
+        bottomHBoxWidget->setLayout(bottomHBox);
+
+        vbox->addWidget(upperHBoxWidget);
+        vbox->addWidget(bottomHBoxWidget);
 
         QFrame *separatorLine = new QFrame(this);
         separatorLine->setFrameShape(QFrame::HLine);
