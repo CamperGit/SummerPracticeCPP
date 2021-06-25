@@ -123,16 +123,11 @@ void MainWindow::on_registrationButton_clicked()
                 }
                 for(int i = 0; i < username.size();i++)
                 {
-                    QRegularExpression reg("([/&%$#])*");
+                    QRegularExpression reg("([~!@#$%^&*{}[]/.,<>?№;:])*");
                     QRegularExpressionMatch matcher = reg.match(username);
                     if(matcher.hasMatch())
                     {
-                        QMessageBox::warning(this,"Ошибка регистрации","Гавно",0,1);
-                        return;
-                    }
-                    if(username[i]=='-'||username[i]=='&'||username[i]=='+'||username[i]=='='||username[i]==','||username[i]=='<'||username[i]=='>')
-                    {
-                        QMessageBox::warning(this,"Ошибка регистрации","Имя пользователя содержит недопустимые символы!",0,1);
+                        QMessageBox::warning(this,"Ошибка регистрации","Некорректно введенные данные!",0,1);
                         return;
                     }
                 }
