@@ -123,7 +123,7 @@ void MainWindow::on_registrationButton_clicked()
                 }
                 for(int i = 0; i < username.size();i++)
                 {
-                    QRegularExpression reg("([~!@#$%^&*{}[]/.,<>?№;:])*");
+                    QRegularExpression reg("([~!@#$`'%^&*{}[\]()/.,<>?№;:|/])+");
                     QRegularExpressionMatch matcher = reg.match(username);
                     if(matcher.hasMatch())
                     {
@@ -212,10 +212,9 @@ void MainWindow::on_sendButton_clicked()
         QMessageBox::warning(this,"Ошибка отправки сообщения","Тема сообщения не может быть пустой!",0,1);
         return;
     }
-    if (subjectText.size()>35)
+    if(subjectText.size()>=35)
     {
-        QMessageBox::warning(this,"Ошибка отправки сообщения","Размер темы содержит слишком много символов!",0,1);
-        return;
+        subjectText = subjectText.replace(35, subjectText.size()-35, "...");
     }
 
 
@@ -258,7 +257,15 @@ void MainWindow::on_messageList_itemClicked(QListWidgetItem *item)
         Message message = messageVar.value<Message>();
         QString text = message.getText();
         QString time = message.getSendTime().toString("yyyy-MM-dd  HH:mm");
-        QString subject = message.getSubject();
+        QString subject;
+       if(message.getSubject().size()>=35)
+       {
+           subject = message.getSubject().replace(35, message.getSubject().size()-35, "...");
+       }
+       else
+       {
+           subject = message.getSubject();
+       }
         MessageReader window(text,time,subject);
         window.setModal(true);
         window.exec();
