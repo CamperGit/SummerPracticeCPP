@@ -13,6 +13,8 @@
 #include <QErrorMessage>
 #include <QMessageBox>
 #include <QVariant>
+#include <QRegularExpression>
+#include <QRegularExpressionMatch>
 
 int MainWindow::addMessagesToMessageList(QVector<Message> messagesToAdd)
 {
@@ -102,6 +104,7 @@ void MainWindow::on_registrationButton_clicked()
 
         if (password.isEmpty() || username.isEmpty())
         {
+
             QMessageBox::warning(this,"Ошибка регистрации","Пароль и логин не могут быть пустыми!",0,1);
             return;
         } else {
@@ -120,6 +123,13 @@ void MainWindow::on_registrationButton_clicked()
                 }
                 for(int i = 0; i < username.size();i++)
                 {
+                    QRegularExpression reg("([/&%$#])*");
+                    QRegularExpressionMatch matcher = reg.match(username);
+                    if(matcher.hasMatch())
+                    {
+                        QMessageBox::warning(this,"Ошибка регистрации","Гавно",0,1);
+                        return;
+                    }
                     if(username[i]=='-'||username[i]=='&'||username[i]=='+'||username[i]=='='||username[i]==','||username[i]=='<'||username[i]=='>')
                     {
                         QMessageBox::warning(this,"Ошибка регистрации","Имя пользователя содержит недопустимые символы!",0,1);
