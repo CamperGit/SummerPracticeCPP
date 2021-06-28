@@ -16,6 +16,11 @@
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
 
+/*
+ * Add messages on message list from vector with messages objects
+ * @param messagesToAdd - messages to add
+ * @return count of added lines
+*/
 int MainWindow::addMessagesToMessageList(QVector<Message> messagesToAdd)
 {
     int counter = 0;

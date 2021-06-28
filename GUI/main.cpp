@@ -22,6 +22,7 @@ int main(int argc, char *argv[])
     loadUsers(users);
 
     MainWindow w(currentUser,users);
+    w.setWindowTitle("Телеграф");
     w.show();
 
     int exit = a.exec();
