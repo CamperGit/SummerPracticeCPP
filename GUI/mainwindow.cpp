@@ -115,7 +115,6 @@ void MainWindow::on_registrationButton_clicked()
         } else {
             for(int i = 0; i < users.size();i++)
             {
-                QString forbidden = "-&=+,<>'";
                 if(username.size()>18)
                 {
                     QMessageBox::warning(this,"Ошибка регистрации","Слишком длинное имя пользователя!",0,1);
@@ -128,7 +127,7 @@ void MainWindow::on_registrationButton_clicked()
                 }
                 for(int i = 0; i < username.size();i++)
                 {
-                    QRegularExpression reg("([~!@#$`'%^&*{}[\]()/.,<>?№;:|/])+");
+                    QRegularExpression reg("([~!@#$`'%^&*{}\[\\]\()/№;:|/])+");
                     QRegularExpressionMatch matcher = reg.match(username);
                     if(matcher.hasMatch())
                     {
